@@ -1,4 +1,5 @@
-# Parameters class.
+# @summary Parameters class.
+#
 class anaconda::params {
 
   $base_url = $::domain ? {

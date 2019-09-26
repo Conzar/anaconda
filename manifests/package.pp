@@ -1,8 +1,17 @@
-# Adds packages to an existing Conda env
-# Need to add Version parameter
-
-# Note: This can be very slow - it downloads packages from the Repo
-
+# @summary Adds packages to an existing Conda env
+#
+# @note Need to add Version parameter.
+#       This can be very slow - it downloads packages from the Repo
+#
+# @param env
+#   The environment to install the package.
+#
+# @param language
+#   The language to use to install the package.
+#
+# @param base_path
+#   The base path to anaconda.
+#
 define anaconda::package(
   $env       = undef,
   $language  = 'python',
