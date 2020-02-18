@@ -12,10 +12,15 @@
 # @param base_path
 #   The base path to anaconda.
 #
+# @param timeout
+#   The puppet exec resource timeout parameter.
+#   @see https://puppet.com/docs/puppet/latest/types/exec.html#exec-attribute-timeout
+#
 define anaconda::package(
-  $env       = undef,
-  $language  = 'python',
-  $base_path = '/opt/anaconda'
+  String  $env       = undef,
+  String  $language  = 'python',
+  String  $base_path = '/opt/anaconda',
+  Integer $timeout   = 0,
 ){
   include anaconda
 
@@ -40,8 +45,8 @@ define anaconda::package(
   }
 
   exec { "anaconda_${env_name}_${name}":
-      command =>
-      "${conda} install --yes --quiet ${env_option} ${options} ${name}",
+      command => "${conda} install --yes --quiet ${env_option} ${options} ${name}",
+      timeout => $timeout,
       require => $env_require,
 
       # Ugly way to check if package is already installed
